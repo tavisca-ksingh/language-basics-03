@@ -40,7 +40,7 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
 
         public static int[] SelectMeals(int[] protein, int[] carbs, int[] fat, string[] dietPlans)
         {
-            // Add your code here.
+       
             int n = protein.Length;
             var calories = new int[n];
 
