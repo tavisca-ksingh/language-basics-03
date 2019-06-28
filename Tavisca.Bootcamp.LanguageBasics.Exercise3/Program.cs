@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Tavisca.Bootcamp.LanguageBasics.Exercise3;
 
 namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
 {
@@ -41,66 +43,81 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
 
         public static int[] SelectMeals(int[] protein, int[] carbs, int[] fat, string[] dietPlans)
         {
-            int mealsCount = protein.Length;
-            var calories = new int[mealsCount];
 
-            for (int i = 0; i < mealsCount; i++)
-            {
-                calories[i] = (protein[i] + carbs[i]) * 5 + fat[i] * 9;
-            }
-            var meals = new int[dietPlans.Length];
+            var meals = new List<Meal>();
+            //todo: populate list from the input arrays
+
+            var mealSelector = new MealSelector(meals);
+            var mealSelections = new int[dietPlans.Length];
             for (int i = 0; i < dietPlans.Length; i++)
             {
-                string dietPlan = dietPlans[i];
-
-                if (dietPlan.Length == 0) meals[i] = 0;
-
-                var MealsIndex = GetMealsDetails(protein, carbs, fat, calories, dietPlan);
-
-                meals[i] = MealsIndex[0];
-
+                var dietPlan = dietPlans[i];
+                var meal = mealSelector.GetPreferredMeal(dietPlan);
+                mealSelections[i] = meal.Id;
             }
-            return meals;
-        }
+            return mealSelections;
 
-        public static List<int> GetMealsDetails(int[] protein, int[] carbs, int[] fat, int[] calories, string deitplan)
-        {
-            List<int> indices = new List<int>();
+        //    int mealsCount = protein.Length;
+        //    var calories = new int[mealsCount];
 
-            for (int k = 0; k < protein.Length; k++) indices.Add(k);
+        //    for (int i = 0; i < mealsCount; i++)
+        //    {
+        //        calories[i] = (protein[i] + carbs[i]) * 5 + fat[i] * 9;
+        //    }
+            
+        //    var meals = new int[dietPlans.Length];
+        //    for (int i = 0; i < dietPlans.Length; i++)
+        //    {
+        //        string dietPlan = dietPlans[i];
 
-            foreach (var ch in deitplan)
-            {
-                switch (ch)
-                {
-                    case 'P':
-                        indices = MaxNum(protein, indices);
-                        break;
-                    case 'p':
-                        indices = MinNum(protein, indices);
-                        break;
-                    case 'F':
-                        indices = MaxNum(fat, indices);
-                        break;
-                    case 'f':
-                        indices = MinNum(fat, indices);
-                        break;
-                    case 'C':
-                        indices = MaxNum(carbs, indices);
-                        break;
-                    case 'c':
-                        indices = MinNum(carbs, indices);
-                        break;
-                    case 'T':
-                        indices = MaxNum(calories, indices);
-                        break;
-                    case 't':
-                        indices = MinNum(calories, indices);
-                        break;
+        //        if (dietPlan.Length == 0) meals[i] = 0;
 
-                }
-            }
-            return indices;
+        //        var MealsIndex = GetMealsDetails(protein, carbs, fat, calories, dietPlan);
+
+        //        meals[i] = MealsIndex[0];
+
+        //    }
+        //    return meals;
+        //}
+
+        //public static List<int> GetMealsDetails(int[] protein, int[] carbs, int[] fat, int[] calories, string deitplan)
+        //{
+        //    List<int> indices = new List<int>();
+
+        //    for (int k = 0; k < protein.Length; k++) indices.Add(k);
+
+        //    foreach (var ch in deitplan)
+        //    {
+        //        switch (ch)
+        //        {
+        //            case 'P':
+        //                indices = MaxNum(protein, indices);
+        //                break;
+        //            case 'p':
+        //                indices = MinNum(protein, indices);
+        //                break;
+        //            case 'F':
+        //                indices = MaxNum(fat, indices);
+        //                break;
+        //            case 'f':
+        //                indices = MinNum(fat, indices);
+        //                break;
+        //            case 'C':
+        //                indices = MaxNum(carbs, indices);
+        //                break;
+        //            case 'c':
+        //                indices = MinNum(carbs, indices);
+        //                break;
+        //            case 'T':
+        //                indices = MaxNum(calories, indices);
+        //                break;
+        //            case 't':
+        //                indices = MinNum(calories, indices);
+        //                break;
+
+        //        }
+        //    }
+        //    return indices;
         }
 
 
